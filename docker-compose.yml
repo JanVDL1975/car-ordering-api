@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  spring-boot-app:
+    image: jvanderlith085/carorderingproject:latest # Replace with your image name
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URL=jdbc:mysql://mysql-db:3306/car_ordering # Update database URL
+      - DB_USER=co_user # Update with your MySQL username
+      - DB_PASSWORD=p@55w0rd # Update with your MySQL password
+
+  mysql-db:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: p@55w0rd
+      MYSQL_DATABASE: car_ordering
+      MYSQL_USER: co_user
+      MYSQL_PASSWORD: p@55w0rd
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
